@@ -14,6 +14,8 @@ import Favicon from "./assets/favicon.png";
 import Screens from './src/Screens/'
 import LoginScreen from './src/Screens/LoginScreen'
 import RegistrationScreen from './src/Screens/RegistrationScreen';
+import ImageScreen from './src/Screens/ImageScreen'
+import AddProductScreen from './src/Screens/AddProductScreen'
 
 import LogoImage from './assets/favicon.png'
 
@@ -35,53 +37,26 @@ const LogoTitle = () => {
     />
   )
 }
-import Svg, {
-  Circle,
-  Ellipse,
-  G,
-
-  TSpan,
-  TextPath,
-  Path,
-  Polygon,
-  Polyline,
-  Line,
-  Rect,
-  Use,
-  Symbol,
-  Defs,
-  LinearGradient,
-  RadialGradient,
-  Stop,
-  ClipPath,
-  Pattern,
-  Mask,
-} from 'react-native-svg';
+import Svg, { Rect } from 'react-native-svg';
 
 export default function App() {
   const [loading, setLoading] = useState('')
   const [user, setUser] = useState('')
 
 
-  if (loading) {
-    return (<>
+  // useEffect(() => {
+  //   const usersRef = firebase.auth().onAuthStateChanged(user => {
+  //     if (user) {
+  //       usersRef.doc(user.uid).get().then(docs => {
+  //         const userData = docs.data()
+  //         setUser(userData)
+  //       })
+  //     } else {
+  //       setLoading(false)
+  //     }
+  //   })
 
-    </>)
-  }
-  useEffect(() => {
-    // const usersRef = firebase.auth().onAuthStateChanged(user => {
-    //   if (user) {
-    //     usersRef.doc(user.uid).get().then(docs => {
-    //       const userData = docs.data()
-    //       setLoading(false)
-    //       setUser(userData)
-    //     })
-    //   } else {
-    //     setLoading(false)
-    //   }
-    // })
-
-  }, [])
+  // }, [])
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -176,6 +151,8 @@ export default function App() {
 
           }} />
         <Stack.Screen name='RegistrationScreen' component={RegistrationScreen} options={{ title: 'Registration Screen' }} />
+        <Stack.Screen name='ImageScreen' component={ImageScreen} options={{ title: 'Image from Firebase' }} />
+        <Stack.Screen name='AddProductScreen' component={AddProductScreen} options={{ title: 'Add product' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
