@@ -4,10 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#ddd',
-  },
-  title: {
-
+    backgroundColor: '#fff',
   },
   logo: {
     flex: 1,
@@ -46,5 +43,61 @@ export default StyleSheet.create({
   picker: {
     marginVertical: 20,
     marginHorizontal: 30,
+  },
+  wrapProduct: {
+    position: "relative",
+    backgroundColor: '#fff',
+    borderStyle: 'solid',
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 3,
+    marginVertical: 6,
+    marginHorizontal: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+
+
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#0F1111',
+    width: '80%',
+  },
+  description: {
+    fontSize: 13,
+    fontStyle: 'italic',
+    color: '#565959',
+
+  },
+  addItem: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    color: '#B12704',
+    fontSize: 30,
+    width: '10%',
+    maxWidth: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    // backgroundColor: '#f0c14b'
+  },
+  wrapPrice: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
+
+  },
+  price: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#B12704',
+    marginTop: 10,
+  },
+  oderOptions: {
+    // height: 0,
   }
+
 });
