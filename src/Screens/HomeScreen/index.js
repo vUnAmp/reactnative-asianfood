@@ -1,10 +1,29 @@
-import React from "react";
+import React from 'react';
+import {
+  View,
+  Text,
+  Button,
+  ScrollView,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import Carousel from '../../components/Carousel';
 
-const HomeScreen = () => {
+// import {createStackNavigator} from '@react-navigation/stack'
+// const Stack = createStackNavigator()
+
+const HomeScreen = ({ navigation }) => {
+  console.log(Dimensions.get('window'));
+  const onSignUpPress = () => {
+    navigation.navigate('RegistrationScreen');
+  };
   return (
-    <div>
-      <h1>Hello from HomeScreen Without View and Text component</h1>
-    </div>
+    <View style={{ marginTop: 50 }}>
+      <Carousel />
+      <Text>Hello 🍚</Text>
+      <Button title='go to Sign Up Screen' onPress={onSignUpPress} />
+    </View>
   );
 };
 
