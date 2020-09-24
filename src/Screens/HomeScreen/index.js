@@ -11,7 +11,11 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
+
+import Modal from 'react-native-modal';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+// import { Icon, Button } from 'native-base';
 
 import Carousel from '../../components/Carousel';
 import firebase from '../../firebase/config';
@@ -28,12 +32,14 @@ const HomeScreen = ({ navigation }) => {
   const onSignUpPress = () => {
     navigation.navigate('RegistrationScreen');
   };
+  const [openModal, setOpenModal] = useState(false);
+  const [percentageShown, setPercentageShown] = useState(0);
   const [products, setProducts] = useState([]);
   const [totalPay, setTotalPay] = useState(0);
   const Product = ({ title, description, price }) => {
     const addItem = () => {
       setTotalPay(totalPay + parseFloat(price));
-      console.log(totalPay);
+      console.log(totalPay.toFixed(2));
     };
     return (
       <View style={mainStyles.wrapProduct}>
@@ -83,6 +89,42 @@ const HomeScreen = ({ navigation }) => {
           <View style={{ marginTop: 50 }}>
             <Carousel navigation={navigation} />
 
+            <Modal
+              isVisible={openModal}
+              //  How much will Closed MODAL
+              swipeThreshold={400}
+              onSwipeComplete={() => {
+                setOpenModal(false);
+              }}
+              backdropOpacity={0.4}
+              propagateSwipe={true}
+              swipeDirection={['down']}
+              style={{
+                flex: 1,
+                width: '100%',
+                backgroundColor: 'pink',
+                alignSelf: 'center',
+                bottom: 0,
+
+                margin: 0,
+              }}
+            >
+              <View
+                style={{
+                  flex: 1,
+                  width: '80%',
+                  height: 400,
+                  backgroundColor: 'red',
+                }}
+              >
+                <Text>Hello ! I am a Modal hee</Text>
+                {/* <Button
+                  title='Hide modal'
+                  onPress={() => setOpenModal(!openModal)}
+                /> */}
+              </View>
+            </Modal>
+
             <View style={styles.mainContent}>
               <Text style={styles.brandTitle}>Bamboo Bistro</Text>
               <Text style={styles.brandDescription}>
@@ -93,28 +135,62 @@ const HomeScreen = ({ navigation }) => {
         }
         data={products}
         renderItem={renderItem}
-        keyExtractor={(item) => item.price + Math.random()}
+        keyExtractor={(item, index) => index.toString()}
       />
+
       {totalPay > 0 ? (
         <TouchableOpacity
-          onPress={() => alert('FAB clicked')}
+          onPress={() => {
+            //  add PRODUCT with uid in to firestore
+            // const ref = firebase.firestore().collection('products').doc();
+            // console.log(ref.id);
+            // firebase
+            //   .firestore()
+            //   .collection('products')
+            //   .doc(ref.id)
+            //   .set({
+            //     hello: 'Hello',
+            //     uid: ref.id,
+            //   })
+            //   .then(() => console.log('successfully'))
+            //   .catch((error) => console.log(error));
+            setOpenModal(!openModal);
+          }}
           style={{
             position: 'absolute',
             width: '100%',
             height: 56,
             alignItems: 'center',
             justifyContent: 'center',
-            right: 20,
-            bottom: 20,
-            backgroundColor: '#03A9F4',
-            borderRadius: 30,
+            right: 0,
+            bottom: 0,
+            backgroundColor: '#fff',
+            borderTopColor: '#ddd',
+            borderTopWidth: 1,
+            // borderRadius: 6,
             elevation: 8,
           }}
         >
-          <Text style={{ fontSize: 40, color: 'white' }}>
-            {' '}
-            totalPay : {totalPay}{' '}
-          </Text>
+          <View
+            style={{
+              width: '96%',
+              height: 46,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#03A9F4',
+              borderRadius: 3,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                color: 'white',
+              }}
+            >
+              {' '}
+              totalPay : {totalPay.toFixed(2)}€{' '}
+            </Text>
+          </View>
         </TouchableOpacity>
       ) : null}
     </SafeAreaView>
