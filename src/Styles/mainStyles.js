@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -10,9 +10,8 @@ export default StyleSheet.create({
     flex: 1,
     height: 120,
     width: 120,
-    alignSelf: "center",
+    alignSelf: 'center',
     margin: 30,
-
   },
   input: {
     height: 48,
@@ -23,7 +22,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     marginLeft: 30,
     marginRight: 30,
-    paddingLeft: 16
+    paddingLeft: 16,
   },
   button: {
     backgroundColor: '#788eec',
@@ -32,20 +31,20 @@ export default StyleSheet.create({
     marginTop: 20,
     height: 48,
     borderRadius: 5,
-    alignItems: "center",
-    justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonTitle: {
     color: 'white',
     fontSize: 16,
-    fontWeight: "bold"
+    fontWeight: 'bold',
   },
   picker: {
     marginVertical: 20,
     marginHorizontal: 30,
   },
   wrapProduct: {
-    position: "relative",
+    position: 'relative',
     backgroundColor: '#fff',
     borderStyle: 'solid',
     borderColor: '#ddd',
@@ -55,8 +54,6 @@ export default StyleSheet.create({
     marginHorizontal: 12,
     paddingVertical: 12,
     paddingHorizontal: 8,
-
-
   },
   title: {
     fontSize: 18,
@@ -68,36 +65,38 @@ export default StyleSheet.create({
     fontSize: 13,
     fontStyle: 'italic',
     color: '#565959',
-
   },
   addItem: {
     position: 'absolute',
     top: 0,
     right: 0,
-    color: '#B12704',
+    color: '#009de0',
     fontSize: 30,
     width: '10%',
     maxWidth: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
     // backgroundColor: '#f0c14b'
   },
   wrapPrice: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginTop: 10,
-
   },
   price: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#B12704',
+    color: '#009de0',
     marginTop: 10,
   },
   oderOptions: {
     // height: 0,
-  }
-
+  },
+  cartSum: {
+    position: 'relative',
+    bottom: 0,
+    zIndex: 2060,
+  },
 });
