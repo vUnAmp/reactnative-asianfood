@@ -9,20 +9,32 @@ const mapState = ({ store }) => ({
   oderDetails: store.oderDetails,
 });
 
-const OderModal = ({ navigation }) => {
+const OderModal = ({ openModal }) => {
   const dispatch = useDispatch();
   const { oderDetails } = useSelector(mapState);
 
   return (
-    <View
-      flex={1}
-      onStartShouldSetResponder={() => true}
-      style={{
-        width: '100%',
-        backgroundColor: '#fff',
-      }}
+    <ScrollView
+    // style={{
+    //   width: '100%',
+    //   backgroundColor: '#fff',
+    //   position: 'absolute',
+    //   bottom: 100,
+    // }}
     >
-      <ScrollView>
+      <View
+        flex={1}
+        onStartShouldSetResponder={() => true}
+        style={{
+          width: '100%',
+          backgroundColor: '#fff',
+          // position: 'absolute',
+          // bottom: 100,
+          minHeight: '100%',
+          bottom: 0,
+          paddingVertical: 60,
+        }}
+      >
         {/* <Text>This is OderModal !</Text> */}
         {oderDetails.map(({ title, description, productId, price, qty }) => {
           return (
@@ -55,8 +67,8 @@ const OderModal = ({ navigation }) => {
             E{' '}
           </Text>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 

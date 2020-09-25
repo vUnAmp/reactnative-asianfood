@@ -103,24 +103,24 @@ const HomeScreen = ({ navigation }) => {
             <Carousel navigation={navigation} />
 
             <Modal
-              // propagateSwipe={true}
+              propagateSwipe={true}
               isVisible={openModal}
               //  How much will Closed MODAL
-              swipeThreshold={350}
+              swipeThreshold={200}
               onSwipeComplete={() => {
                 setOpenModal(false);
               }}
               backdropOpacity={0.4}
-              swipeDirection={['down']}
+              swipeDirection={'down'}
               style={{
                 flex: 1,
                 width: '100%',
-                // backgroundColor: 'white',
+                // backgroundColor: 'pink',
                 alignSelf: 'center',
                 // bottom: 0,
-                // position: 'absolute',
+                position: 'relative',
                 // top: 30,
-                // margin: 0,
+                margin: 0,
                 marginTop: 60,
                 marginBottom: 0,
               }}
@@ -141,11 +141,66 @@ const HomeScreen = ({ navigation }) => {
                   borderRadius: 8,
                 }}
               > */}
-              {/* <Text>Hello ! I am a Modal hee</Text>
+              <Text>Hello ! I am a Modal hee</Text>
 
-                <Button title='x' onPress={() => setOpenModal(!openModal)} /> */}
+              <Button title='x' onPress={() => setOpenModal(!openModal)} />
+              {/* 
+              <Text
+                onPress={() => (openModal = !openModal)}
+                style={{
+                  backgroundColor: 'pink',
+                  position: 'relative',
+                  top: 0,
+                  right: 0,
+                  // zIndex: 2090,
+                }}
+              >
+                Close XX
+              </Text> */}
 
               <OderModal />
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => {
+                  setOpenModal(!openModal);
+                }}
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  height: 56,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: '#fff',
+                  borderTopColor: '#ddd',
+                  borderTopWidth: 1,
+                  // borderRadius: 6,
+                  elevation: 8,
+                }}
+              >
+                <View
+                  style={{
+                    width: '96%',
+                    height: 46,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    // backgroundColor: 'blue',
+                    backgroundColor: '#03A9F4',
+                    borderRadius: 3,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: 'white',
+                    }}
+                  >
+                    {' '}
+                    totalPay : {totalPay.toFixed(2)}€{' '}
+                  </Text>
+                </View>
+              </TouchableOpacity>
               {/* </View> */}
             </Modal>
 

@@ -6,7 +6,10 @@ import {
   Image,
   TouchableOpacity,
   Button,
+  ScrollView,
 } from 'react-native';
+import Modal from 'react-native-modal';
+
 import { Picker } from '@react-native-community/picker';
 
 import styles from '../../Styles/mainStyles';
@@ -14,9 +17,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import firebase from '../../firebase/config';
 
 const AddProductScreen = ({ navigation }) => {
+  const [openModal, setOpenModal] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [iamgeName, setImageName] = useState('');
   const [category, setCategory] = useState('Beliebte Gerichte');
 
@@ -52,6 +56,9 @@ const AddProductScreen = ({ navigation }) => {
       })
       .then(() => resetForm())
       .catch((error) => console.log(error));
+  };
+  const handleScrollTo = (p) => {
+    console.log(p);
   };
 
   return (
