@@ -12,41 +12,53 @@ import {
   FlatList,
 } from 'react-native';
 
-import Modal from 'react-native-modal';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useSelector, useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/Store/store.action';
 
-// import { Icon, Button } from 'native-base';
+import Modal from 'react-native-modal';
 
 import Carousel from '../../components/Carousel';
 import firebase from '../../firebase/config';
 
 import mainStyles from '../../Styles/mainStyles';
-// import styles from '../LoginScreen/styles';
+import OderModal from '../OderMoal';
 
-// import {createStackNavigator} from '@react-navigation/stack'
-// const Stack = createStackNavigator()
-// const Tab = createBottomTabNavigator()
+const mapState = ({ store }) => ({
+  oderDetails: store.oderDetails,
+});
 
 const HomeScreen = ({ navigation }) => {
   // console.log(Dimensions.get('window'));
+
+  const dispatch = useDispatch();
+  const { oderDetails } = useSelector(mapState);
+
   const onSignUpPress = () => {
     navigation.navigate('RegistrationScreen');
   };
   const [openModal, setOpenModal] = useState(false);
-  const [percentageShown, setPercentageShown] = useState(0);
   const [products, setProducts] = useState([]);
+  const [qty, setQty] = useState(1);
   const [totalPay, setTotalPay] = useState(0);
-  const Product = ({ title, description, price }) => {
+  const Product = ({ title, description, price, productId }) => {
     const addItem = () => {
-      setTotalPay(totalPay + parseFloat(price));
-      console.log(totalPay.toFixed(2));
+      setTotalPay(totalPay + price);
+      const itemExits = oderDetails.find(
+        (item) => item.productId === productId
+      );
+      if (!itemExits)
+        oderDetails.push({ title, description, price, productId, qty });
+      else itemExits.qty += 1;
+
+      dispatch(addProduct(oderDetails));
+      console.log(oderDetails);
     };
     return (
       <View style={mainStyles.wrapProduct}>
         <Text style={mainStyles.title}>{title}</Text>
         <Text style={mainStyles.description}>{description}</Text>
         {/* <View style={mainStyles.wrapPrice}> */}
-        <Text style={mainStyles.price}>{price} € </Text>
+        <Text style={mainStyles.price}>{price.toFixed(2)} € </Text>
         <Text style={mainStyles.addItem} onPress={addItem} title='+'>
           +
         </Text>
@@ -79,6 +91,7 @@ const HomeScreen = ({ navigation }) => {
       title={item.title}
       price={item.price}
       description={item.description}
+      productId={item.uid}
     />
   );
 
@@ -102,22 +115,30 @@ const HomeScreen = ({ navigation }) => {
               style={{
                 flex: 1,
                 width: '100%',
-                backgroundColor: 'pink',
+                // backgroundColor: 'white',
                 alignSelf: 'center',
                 bottom: 0,
-
+                // top: 30,
                 margin: 0,
               }}
             >
               <View
                 style={{
                   flex: 1,
-                  width: '80%',
-                  height: 400,
-                  backgroundColor: 'red',
+                  flexDirection: 'column',
+                  // justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '90%',
+                  width: '100%',
+                  backgroundColor: 'white',
+                  position: 'absolute',
+                  bottom: 0,
+                  borderRadius: 8,
                 }}
               >
                 <Text>Hello ! I am a Modal hee</Text>
+                <OderModal />
+
                 {/* <Button
                   title='Hide modal'
                   onPress={() => setOpenModal(!openModal)}

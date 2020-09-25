@@ -1,21 +1,21 @@
-import React from "react";
-import { View, TouchableOpacity, Button, Text } from "react-native";
-import Svg, { Rect } from "react-native-svg";
+import React from 'react';
+import { View, TouchableOpacity, Button, Text } from 'react-native';
+import Svg, { Rect } from 'react-native-svg';
 
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator } from '@react-navigation/stack';
 
-import LoginScreen from "../LoginScreen";
-import RegistrationScreen from "../RegistrationScreen";
-import AddProductScreen from "../AddProductScreen";
-import HomeScreen from "../HomeScreen";
-import styles from "./styles";
+import LoginScreen from '../LoginScreen';
+import RegistrationScreen from '../RegistrationScreen';
+import AddProductScreen from '../AddProductScreen';
+import HomeScreen from '../HomeScreen';
+import styles from './styles';
 
 const Stack = createStackNavigator();
 
 const AddproductStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Add Product Screen" component={AddProductScreen} />
+      <Stack.Screen name='AddProductScreen' component={AddProductScreen} />
     </Stack.Navigator>
   );
 };
@@ -26,17 +26,18 @@ const Brand = () => {
 const MainStackNavigator = ({ navigation }) => {
   return (
     <Stack.Navigator>
+      {/* <Stack.Screen name='AddProductScreen' component={AddProductScreen} /> */}
       <Stack.Screen
-        name="HomeScreen"
+        name='HomeScreen'
         options={{
-          title: "AsianBistro",
-          headerTitleAlign: "center",
+          title: 'AsianBistro',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
-            color: "#202125",
+            color: '#202125',
           },
 
           headerStyle: {
-            backgroundColor: "#fff",
+            backgroundColor: '#fff',
           },
           headerRight: () => (
             <View>
@@ -50,41 +51,41 @@ const MainStackNavigator = ({ navigation }) => {
                 () => navigation.openDrawer()
                 // <View> <Text>Hello</Text>  </View>
               }
-              title="hello"
+              title='hello'
 
               // color='rgba(0,0,0,0.1)'
             >
               <View style={{ width: 50, height: 50 }}>
-                <Svg height="100%" width="100%" viewBox="0 4 100 100">
+                <Svg height='100%' width='100%' viewBox='0 4 100 100'>
                   <Rect
-                    x="20"
-                    y="40"
-                    rx="2"
-                    width="50"
-                    height="4.01"
-                    stroke="#fd4900"
-                    strokeWidth="1.81"
-                    fill="#fd4900"
+                    x='20'
+                    y='40'
+                    rx='2'
+                    width='50'
+                    height='4.01'
+                    stroke='#fd4900'
+                    strokeWidth='1.81'
+                    fill='#fd4900'
                   />
                   <Rect
-                    x="20"
-                    y="55"
-                    rx="2"
-                    width="50"
-                    height="4.01"
-                    stroke="#fd4900"
-                    strokeWidth="1.81"
-                    fill="#fd4900"
+                    x='20'
+                    y='55'
+                    rx='2'
+                    width='50'
+                    height='4.01'
+                    stroke='#fd4900'
+                    strokeWidth='1.81'
+                    fill='#fd4900'
                   />
                   <Rect
-                    x="20"
-                    y="70"
-                    rx="2"
-                    width="50"
-                    height="4.01"
-                    stroke="#fd4900"
-                    strokeWidth="1.81"
-                    fill="#fd4900"
+                    x='20'
+                    y='70'
+                    rx='2'
+                    width='50'
+                    height='4.01'
+                    stroke='#fd4900'
+                    strokeWidth='1.81'
+                    fill='#fd4900'
                   />
                 </Svg>
               </View>
@@ -93,7 +94,7 @@ const MainStackNavigator = ({ navigation }) => {
         }}
         component={HomeScreen}
       />
-      <Stack.Screen name="RegistrationScreen" component={RegistrationScreen} />
+      <Stack.Screen name='RegistrationScreen' component={RegistrationScreen} />
     </Stack.Navigator>
   );
 };
