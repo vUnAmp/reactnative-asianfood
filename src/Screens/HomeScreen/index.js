@@ -103,26 +103,31 @@ const HomeScreen = ({ navigation }) => {
             <Carousel navigation={navigation} />
 
             <Modal
+              // propagateSwipe={true}
               isVisible={openModal}
               //  How much will Closed MODAL
-              swipeThreshold={400}
+              swipeThreshold={350}
               onSwipeComplete={() => {
                 setOpenModal(false);
               }}
               backdropOpacity={0.4}
-              propagateSwipe={true}
               swipeDirection={['down']}
               style={{
                 flex: 1,
                 width: '100%',
                 // backgroundColor: 'white',
                 alignSelf: 'center',
-                bottom: 0,
+                // bottom: 0,
+                // position: 'absolute',
                 // top: 30,
-                margin: 0,
+                // margin: 0,
+                marginTop: 60,
+                marginBottom: 0,
               }}
             >
-              <View
+              {/* <View
+                // flex={1}
+                // onStartShouldSetResponder={() => true}
                 style={{
                   flex: 1,
                   flexDirection: 'column',
@@ -131,23 +136,26 @@ const HomeScreen = ({ navigation }) => {
                   height: '90%',
                   width: '100%',
                   backgroundColor: 'white',
-                  position: 'absolute',
-                  bottom: 0,
+                  // position: 'absolute',
+                  // bottom: 0,
                   borderRadius: 8,
                 }}
-              >
-                <Text>Hello ! I am a Modal hee</Text>
-                <OderModal />
+              > */}
+              {/* <Text>Hello ! I am a Modal hee</Text>
 
-                {/* <Button
-                  title='Hide modal'
-                  onPress={() => setOpenModal(!openModal)}
-                /> */}
-              </View>
+                <Button title='x' onPress={() => setOpenModal(!openModal)} /> */}
+
+              <OderModal />
+              {/* </View> */}
             </Modal>
 
             <View style={styles.mainContent}>
-              <Text style={styles.brandTitle}>Bamboo Bistro</Text>
+              <Text style={styles.brandTitle}>
+                Bamboo Bistro Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Laboriosam inventore perferendis facere quod veritatis ut
+                commodi, quae fuga porro in natus tempora itaque consequuntur
+                fugiat cumque explicabo nostrum. Illo, hic.
+              </Text>
               <Text style={styles.brandDescription}>
                 Healthy and fresh food{' '}
               </Text>
@@ -161,6 +169,7 @@ const HomeScreen = ({ navigation }) => {
 
       {totalPay > 0 ? (
         <TouchableOpacity
+          activeOpacity={0.9}
           onPress={() => {
             //  add PRODUCT with uid in to firestore
             // const ref = firebase.firestore().collection('products').doc();
@@ -198,6 +207,7 @@ const HomeScreen = ({ navigation }) => {
               height: 46,
               justifyContent: 'center',
               alignItems: 'center',
+              // backgroundColor: 'blue',
               backgroundColor: '#03A9F4',
               borderRadius: 3,
             }}
