@@ -95,6 +95,11 @@ const HomeScreen = ({ navigation }) => {
     />
   );
 
+  const closeModal = () => {
+    setOpenModal(false);
+    console.log('just clicking close Modal');
+  };
+
   return (
     <SafeAreaView>
       <FlatList
@@ -125,40 +130,7 @@ const HomeScreen = ({ navigation }) => {
                 marginBottom: 0,
               }}
             >
-              {/* <View
-                // flex={1}
-                // onStartShouldSetResponder={() => true}
-                style={{
-                  flex: 1,
-                  flexDirection: 'column',
-                  // justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '90%',
-                  width: '100%',
-                  backgroundColor: 'white',
-                  // position: 'absolute',
-                  // bottom: 0,
-                  borderRadius: 8,
-                }}
-              > */}
-              <Text>Hello ! I am a Modal hee</Text>
-
-              <Button title='x' onPress={() => setOpenModal(!openModal)} />
-              {/* 
-              <Text
-                onPress={() => (openModal = !openModal)}
-                style={{
-                  backgroundColor: 'pink',
-                  position: 'relative',
-                  top: 0,
-                  right: 0,
-                  // zIndex: 2090,
-                }}
-              >
-                Close XX
-              </Text> */}
-
-              <OderModal />
+              <OderModal data={closeModal} />
               <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => {
@@ -226,19 +198,6 @@ const HomeScreen = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => {
-            //  add PRODUCT with uid in to firestore
-            // const ref = firebase.firestore().collection('products').doc();
-            // console.log(ref.id);
-            // firebase
-            //   .firestore()
-            //   .collection('products')
-            //   .doc(ref.id)
-            //   .set({
-            //     hello: 'Hello',
-            //     uid: ref.id,
-            //   })
-            //   .then(() => console.log('successfully'))
-            //   .catch((error) => console.log(error));
             setOpenModal(!openModal);
           }}
           style={{

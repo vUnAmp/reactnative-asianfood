@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Text, View, Button, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  Button,
+  ScrollView,
+  TouchableHighlight,
+} from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,19 +15,13 @@ const mapState = ({ store }) => ({
   oderDetails: store.oderDetails,
 });
 
-const OderModal = ({ openModal }) => {
+const OderModal = ({ data }) => {
   const dispatch = useDispatch();
   const { oderDetails } = useSelector(mapState);
+  console.log(data);
 
   return (
-    <ScrollView
-    // style={{
-    //   width: '100%',
-    //   backgroundColor: '#fff',
-    //   position: 'absolute',
-    //   bottom: 100,
-    // }}
-    >
+    <ScrollView>
       <View
         flex={1}
         onStartShouldSetResponder={() => true}
@@ -32,10 +32,57 @@ const OderModal = ({ openModal }) => {
           // bottom: 100,
           minHeight: '100%',
           bottom: 0,
-          paddingVertical: 60,
+          paddingBottom: 60,
+          paddingTop: 6,
         }}
       >
-        {/* <Text>This is OderModal !</Text> */}
+        <View
+          style={{
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignSelf: 'center',
+            alignItems: 'center',
+            paddingBottom: 6,
+            paddingHorizontal: 10,
+            borderBottomColor: '#ddd',
+            borderBottomWidth: 1,
+          }}
+        >
+          <Text
+            style={{
+              color: '#009de0',
+              fontSize: 16,
+            }}
+          >
+            Your Oder Details:
+          </Text>
+          {/* <TouchableHighlight
+            style={{
+              height: 46,
+              width: 46,
+              borderRadius: 50,
+              backgroundColor: 'yellow',
+              marginRight: -10,
+              
+            }}
+          >
+            <Button title='&times;' onPress={() => data()} color='#000' />
+          </TouchableHighlight> */}
+          <Text
+            onPress={() => data()}
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              // backgroundColor: 'red',
+              padding: 10,
+              marginRight: -6,
+              marginTop: -6,
+            }}
+          >
+            &times;
+          </Text>
+        </View>
         {oderDetails.map(({ title, description, productId, price, qty }) => {
           return (
             <View style={oderStyles.wrapProduct} key={productId}>
@@ -43,11 +90,22 @@ const OderModal = ({ openModal }) => {
               {/* <Text style={oderStyles.description}>{description}</Text> */}
               {/* <View style={mainStyles.wrapPrice}> */}
               <Text style={oderStyles.price}>{price.toFixed(2)} € </Text>
-              <View style={oderStyles.addItem}>
+              {/* <View style={oderStyles.addItem}>
                 <Button style={oderStyles.button} title='+' />
               </View>
               <View style={oderStyles.minusItem}>
                 <Button style={oderStyles.button} title='-' />
+              
+              </View> */}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  marginRight: -12,
+                }}
+              >
+                <Text style={oderStyles.setting}>-</Text>
+                <Text style={oderStyles.setting}>+</Text>
               </View>
 
               <Text style={oderStyles.qty}> {qty} </Text>
