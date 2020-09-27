@@ -97,14 +97,13 @@ const HomeScreen = ({ navigation }) => {
 
   const closeModal = () => {
     setOpenModal(false);
-    console.log('just clicking close Modal');
   };
 
   return (
     <SafeAreaView>
       <FlatList
         ListHeaderComponent={
-          <View style={{ marginTop: 50 }}>
+          <View style={{ marginTop: 10 }}>
             <Carousel navigation={navigation} />
 
             <Modal
@@ -115,7 +114,8 @@ const HomeScreen = ({ navigation }) => {
               onSwipeComplete={() => {
                 setOpenModal(false);
               }}
-              backdropOpacity={0.4}
+              backdropOpacity={1}
+              backdropColor='white'
               swipeDirection={'down'}
               style={{
                 flex: 1,
@@ -126,7 +126,7 @@ const HomeScreen = ({ navigation }) => {
                 position: 'relative',
                 // top: 30,
                 margin: 0,
-                marginTop: 60,
+                marginTop: 20,
                 marginBottom: 0,
               }}
             >
@@ -135,6 +135,7 @@ const HomeScreen = ({ navigation }) => {
                 activeOpacity={0.9}
                 onPress={() => {
                   setOpenModal(!openModal);
+                  navigation.push('CheckoutScreen');
                 }}
                 style={{
                   position: 'absolute',
@@ -168,8 +169,12 @@ const HomeScreen = ({ navigation }) => {
                       color: 'white',
                     }}
                   >
-                    {' '}
-                    totalPay : {totalPay.toFixed(2)}€{' '}
+                    Oder{' '}
+                    {oderDetails
+                      .map((item) => item.qty * item.price)
+                      .reduce((a, b) => a + b, 0)
+                      .toFixed(2)}
+                    €{' '}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -232,8 +237,12 @@ const HomeScreen = ({ navigation }) => {
                 color: 'white',
               }}
             >
-              {' '}
-              totalPay : {totalPay.toFixed(2)}€{' '}
+              Your cart{' '}
+              {oderDetails
+                .map((item) => item.qty * item.price)
+                .reduce((a, b) => a + b, 0)
+                .toFixed(2)}
+              €{' '}
             </Text>
           </View>
         </TouchableOpacity>

@@ -88,7 +88,7 @@ export default StyleSheet.create({
   price: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#009de0',
+    color: '#fd4900',
     marginTop: 10,
   },
   oderOptions: {

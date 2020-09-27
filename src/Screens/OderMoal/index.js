@@ -9,6 +9,8 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { addProduct } from '../../redux/Store/store.action';
+
 import oderStyles from './oderStyles';
 
 const mapState = ({ store }) => ({
@@ -18,8 +20,15 @@ const mapState = ({ store }) => ({
 const OderModal = ({ data }) => {
   const dispatch = useDispatch();
   const { oderDetails } = useSelector(mapState);
-  console.log(data);
-
+  const plusItem = ({ title, description, productId, price, qty }) => {
+    oderDetails.find((item) => item.productId === productId).qty += 1;
+    dispatch(addProduct(oderDetails));
+    console.log('hey plus');
+  };
+  const minusItem = ({ title, description, productId, price, qty }) => {
+    oderDetails.find((item) => item.productId === productId).qty -= 1;
+    dispatch(addProduct(oderDetails));
+  };
   return (
     <ScrollView>
       <View
@@ -104,8 +113,22 @@ const OderModal = ({ data }) => {
                   marginRight: -12,
                 }}
               >
-                <Text style={oderStyles.setting}>-</Text>
-                <Text style={oderStyles.setting}>+</Text>
+                <Text
+                  style={oderStyles.setting}
+                  onPress={() =>
+                    minusItem({ title, description, productId, price, qty })
+                  }
+                >
+                  -
+                </Text>
+                <Text
+                  style={oderStyles.setting}
+                  onPress={() =>
+                    plusItem({ title, description, productId, price, qty })
+                  }
+                >
+                  +
+                </Text>
               </View>
 
               <Text style={oderStyles.qty}> {qty} </Text>
@@ -114,7 +137,7 @@ const OderModal = ({ data }) => {
             </View>
           );
         })}
-        <View>
+        <View style={oderStyles.sumRow}>
           <Text>SubTotal</Text>
           <Text>
             {' '}
@@ -122,7 +145,22 @@ const OderModal = ({ data }) => {
               .map((item) => item.qty * item.price)
               .reduce((a, b) => a + b, 0)
               .toFixed(2)}
-            E{' '}
+            €{' '}
+          </Text>
+        </View>
+        <View style={oderStyles.sumRow}>
+          <Text>Delivery Costs</Text>
+          <Text style={{ fontWeight: 'bold', color: '#fd4900' }}>FREE </Text>
+        </View>
+        <View style={oderStyles.totalPay}>
+          <Text>Total</Text>
+          <Text>
+            {' '}
+            {oderDetails
+              .map((item) => item.qty * item.price)
+              .reduce((a, b) => a + b, 0)
+              .toFixed(2)}
+            €{' '}
           </Text>
         </View>
       </View>

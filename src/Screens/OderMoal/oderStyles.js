@@ -20,10 +20,10 @@ export default StyleSheet.create({
   },
   description: {},
   price: {
-    width: '14%',
+    width: '16%',
     position: 'absolute',
     top: 16,
-    right: 8,
+    right: 1,
     fontSize: 14,
     // fontWeight: 'bold',
   },
@@ -32,8 +32,9 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 16,
     left: 6,
-    color: '#009de0',
+    color: '#fd4900',
     fontSize: 14,
+    fontWeight: 'bold',
   },
   wrapButton: {
     width: 30,
@@ -77,5 +78,17 @@ export default StyleSheet.create({
     // marginBottom: -2,
     // paddingTop: 3,
     color: '#009de0',
+  },
+  sumRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 10,
+    paddingHorizontal: 8,
+  },
+  totalPay: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    paddingHorizontal: 8,
   },
 });

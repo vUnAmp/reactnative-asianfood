@@ -9,6 +9,8 @@ import RegistrationScreen from '../RegistrationScreen';
 import AddProductScreen from '../AddProductScreen';
 import HomeScreen from '../HomeScreen';
 import styles from './styles';
+import { StackActions } from '@react-navigation/native';
+import CheckoutScreen from '../CheckoutScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,7 +27,11 @@ const Brand = () => {
 
 const MainStackNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitle: '',
+      }}
+    >
       {/* <Stack.Screen name='AddProductScreen' component={AddProductScreen} /> */}
       <Stack.Screen
         name='HomeScreen'
@@ -93,6 +99,19 @@ const MainStackNavigator = ({ navigation }) => {
           ),
         }}
         component={HomeScreen}
+      />
+
+      <Stack.Screen
+        name='CheckoutScreen'
+        options={{
+          title: 'Checkout',
+          headerTitleStyle: {
+            fontSize: 14,
+            color: '#009de0',
+          },
+          headerTintColor: '#fd4900',
+        }}
+        component={CheckoutScreen}
       />
       <Stack.Screen name='RegistrationScreen' component={RegistrationScreen} />
     </Stack.Navigator>
