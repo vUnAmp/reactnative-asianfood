@@ -12,8 +12,8 @@ export default StyleSheet.create({
     // backgroundColor: 'pink',
   },
   title: {
-    width: '70%',
-    marginLeft: '7%',
+    width: '68%',
+    marginLeft: '8%',
     fontSize: 14,
     fontWeight: 'bold',
     paddingBottom: 8,
@@ -22,11 +22,12 @@ export default StyleSheet.create({
   },
   description: {},
   price: {
-    width: '16%',
+    width: '20%',
     position: 'absolute',
     top: 16,
-    right: 1,
+    right: 11,
     fontSize: 14,
+    textAlign: 'right',
     // fontWeight: 'bold',
   },
   qty: {

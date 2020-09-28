@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
+  TouchableHighlight,
   Text,
   Button,
   ScrollView,
@@ -22,6 +23,7 @@ import firebase from '../../firebase/config';
 
 import mainStyles from '../../Styles/mainStyles';
 import OderModal from '../OderMoal';
+import { set } from 'react-native-reanimated';
 
 const mapState = ({ store }) => ({
   oderDetails: store.oderDetails,
@@ -36,6 +38,7 @@ const HomeScreen = ({ navigation }) => {
   const onSignUpPress = () => {
     navigation.navigate('RegistrationScreen');
   };
+
   const [openModal, setOpenModal] = useState(false);
   const [products, setProducts] = useState([]);
   const [qty, setQty] = useState(1);
@@ -131,54 +134,56 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <OderModal data={closeModal} />
-              <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={() => {
-                  console.log(oderDetails);
-                  setOpenModal(!openModal);
-                  navigation.push('CheckoutScreen');
-                }}
-                style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: '#fff',
-                  borderTopColor: '#ddd',
-                  borderTopWidth: 1,
-                  // borderRadius: 6,
-                  elevation: 8,
-                }}
-              >
-                <View
+              {oderDetails.length > 0 ? (
+                <TouchableHighlight
+                  activeOpacity={0.85}
+                  underlayColor='#fff'
+                  onPress={() => {
+                    setOpenModal(!openModal);
+                    navigation.push('CheckoutScreen');
+                  }}
                   style={{
-                    width: '96%',
-                    height: 46,
-                    justifyContent: 'center',
+                    position: 'absolute',
+                    width: '100%',
+                    height: 56,
                     alignItems: 'center',
-                    // backgroundColor: 'blue',
-                    backgroundColor: '#03A9F4',
-                    borderRadius: 3,
+                    justifyContent: 'center',
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: '#fff',
+                    borderTopColor: '#ddd',
+                    borderTopWidth: 1,
+                    // borderRadius: 6,
+                    elevation: 8,
                   }}
                 >
-                  <Text
+                  <View
                     style={{
-                      fontSize: 16,
-                      color: 'white',
+                      width: '96%',
+                      height: 46,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      // backgroundColor: 'blue',
+                      backgroundColor: '#009de0',
+                      borderRadius: 3,
                     }}
                   >
-                    Oder{' '}
-                    {oderDetails
-                      .map((item) => item.qty * item.price)
-                      .reduce((a, b) => a + b, 0)
-                      .toFixed(2)}
-                    €{' '}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: 'white',
+                      }}
+                    >
+                      Oder{' '}
+                      {oderDetails
+                        .map((item) => item.qty * item.price)
+                        .reduce((a, b) => a + b, 0)
+                        .toFixed(2)}
+                      €{' '}
+                    </Text>
+                  </View>
+                </TouchableHighlight>
+              ) : null}
               {/* </View> */}
             </Modal>
 
@@ -195,15 +200,29 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View>
         }
+        ListFooterComponent={
+          <View
+            style={{
+              paddingVertical: 8,
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Text>AsianBistro </Text>
+            <Text>Herzbergstraße 128-139, 10365 Berlin</Text>
+          </View>
+        }
         data={products}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
 
-      {totalPay > 0 ? (
-        <TouchableOpacity
-          activeOpacity={0.9}
+      {oderDetails.length > 0 ? (
+        <TouchableHighlight
+          activeOpacity={0.85}
+          underlayColor='#fff'
           onPress={() => {
+            // setTouchColor('#03A9F4');
             setOpenModal(!openModal);
           }}
           style={{
@@ -227,8 +246,8 @@ const HomeScreen = ({ navigation }) => {
               height: 46,
               justifyContent: 'center',
               alignItems: 'center',
-              // backgroundColor: 'blue',
-              backgroundColor: '#03A9F4',
+              backgroundColor: '#009de0',
+              // backgroundColor: '#fff',
               borderRadius: 3,
             }}
           >
@@ -246,7 +265,7 @@ const HomeScreen = ({ navigation }) => {
               €{' '}
             </Text>
           </View>
-        </TouchableOpacity>
+        </TouchableHighlight>
       ) : null}
     </SafeAreaView>
   );

@@ -5,6 +5,7 @@ import {
   Button,
   ScrollView,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,8 +54,6 @@ const OderModal = ({ data }) => {
         style={{
           width: '100%',
           backgroundColor: '#fff',
-          // position: 'absolute',
-          // bottom: 100,
           minHeight: '100%',
           bottom: 0,
           paddingBottom: 60,
@@ -82,18 +81,6 @@ const OderModal = ({ data }) => {
           >
             Your Oder Details:
           </Text>
-          {/* <TouchableHighlight
-            style={{
-              height: 46,
-              width: 46,
-              borderRadius: 50,
-              backgroundColor: 'yellow',
-              marginRight: -10,
-              
-            }}
-          >
-            <Button title='&times;' onPress={() => data()} color='#000' />
-          </TouchableHighlight> */}
           <Text
             onPress={() => data()}
             style={{
@@ -118,6 +105,9 @@ const OderModal = ({ data }) => {
                 {qty > 0 ? (
                   <View style={oderStyles.wrapProduct}>
                     <Text style={oderStyles.title}>{title}</Text>
+                    <Text style={oderStyles.price}>
+                      {(qty * price).toFixed(2)} €{' '}
+                    </Text>
 
                     <View
                       style={{
@@ -163,36 +153,83 @@ const OderModal = ({ data }) => {
             );
           })
         ) : (
-          <View>
-            <Text> Your Cart is empty </Text>
+          <View
+            style={{
+              padding: 20,
+              paddingTop: 60,
+              alignItems: 'center',
+            }}
+          >
+            <Text
+              style={{
+                textAlign: 'center',
+                marginBottom: 20,
+              }}
+            >
+              {' '}
+              Your Cart is empty{' '}
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                data();
+              }}
+              style={{
+                width: '40%',
+                height: 56,
+                alignItems: 'center',
+                justifyContent: 'center',
+
+                backgroundColor: '#03A9F4',
+                borderTopColor: '#ddd',
+                borderTopWidth: 1,
+                borderRadius: 3,
+                elevation: 8,
+              }}
+            >
+              <Text
+                style={{
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: 16,
+                }}
+              >
+                Just add oder
+              </Text>
+            </TouchableOpacity>
           </View>
         )}
-        <View style={oderStyles.sumRow}>
-          <Text>SubTotal</Text>
-          <Text>
-            {' '}
-            {oderDetails
-              .map((item) => item.qty * item.price)
-              .reduce((a, b) => a + b, 0)
-              .toFixed(2)}
-            €{' '}
-          </Text>
-        </View>
-        <View style={oderStyles.sumRow}>
-          <Text>Delivery Costs</Text>
-          <Text style={{ fontWeight: 'bold', color: '#fd4900' }}>FREE </Text>
-        </View>
-        <View style={oderStyles.totalPay}>
-          <Text>Total</Text>
-          <Text>
-            {' '}
-            {oderDetails
-              .map((item) => item.qty * item.price)
-              .reduce((a, b) => a + b, 0)
-              .toFixed(2)}
-            €{' '}
-          </Text>
-        </View>
+        {oderDetails.length > 0 ? (
+          <>
+            <View style={oderStyles.sumRow}>
+              <Text>SubTotal</Text>
+              <Text>
+                {' '}
+                {oderDetails
+                  .map((item) => item.qty * item.price)
+                  .reduce((a, b) => a + b, 0)
+                  .toFixed(2)}
+                €{' '}
+              </Text>
+            </View>
+            <View style={oderStyles.sumRow}>
+              <Text>Delivery Costs</Text>
+              <Text style={{ fontWeight: 'bold', color: '#fd4900' }}>
+                FREE{' '}
+              </Text>
+            </View>
+            <View style={oderStyles.totalPay}>
+              <Text>Total</Text>
+              <Text>
+                {' '}
+                {oderDetails
+                  .map((item) => item.qty * item.price)
+                  .reduce((a, b) => a + b, 0)
+                  .toFixed(2)}
+                €{' '}
+              </Text>
+            </View>
+          </>
+        ) : null}
       </View>
     </ScrollView>
   );
