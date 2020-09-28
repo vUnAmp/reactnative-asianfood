@@ -27,8 +27,24 @@ const OderModal = ({ data }) => {
   };
   const minusItem = ({ title, description, productId, price, qty }) => {
     oderDetails.find((item) => item.productId === productId).qty -= 1;
+    const removeItem = oderDetails.find((item) => item.productId === productId);
+    console.log(removeItem);
+    if (removeItem.qty === 0) {
+      console.log(oderDetails.length);
+      // console.log(oderDetails.filter((item) => item.productId !== productId));
+      for (let i = 0; i < oderDetails.length; i++) {
+        if (oderDetails[i].qty === 0) {
+          console.log(oderDetails[i]);
+          oderDetails.splice(i, 1);
+        }
+      }
+      dispatch(addProduct(oderDetails));
+    }
     dispatch(addProduct(oderDetails));
+    console.log(oderDetails);
   };
+
+  console.log('rendering ....');
   return (
     <ScrollView>
       <View
@@ -92,51 +108,65 @@ const OderModal = ({ data }) => {
             &times;
           </Text>
         </View>
-        {oderDetails.map(({ title, description, productId, price, qty }) => {
-          return (
-            <View style={oderStyles.wrapProduct} key={productId}>
-              <Text style={oderStyles.title}>{title}</Text>
-              {/* <Text style={oderStyles.description}>{description}</Text> */}
-              {/* <View style={mainStyles.wrapPrice}> */}
-              <Text style={oderStyles.price}>{price.toFixed(2)} € </Text>
-              {/* <View style={oderStyles.addItem}>
-                <Button style={oderStyles.button} title='+' />
-              </View>
-              <View style={oderStyles.minusItem}>
-                <Button style={oderStyles.button} title='-' />
-              
-              </View> */}
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'flex-end',
-                  marginRight: -12,
-                }}
-              >
-                <Text
-                  style={oderStyles.setting}
-                  onPress={() =>
-                    minusItem({ title, description, productId, price, qty })
-                  }
-                >
-                  -
-                </Text>
-                <Text
-                  style={oderStyles.setting}
-                  onPress={() =>
-                    plusItem({ title, description, productId, price, qty })
-                  }
-                >
-                  +
-                </Text>
-              </View>
+        {oderDetails
+          .map((item) => item.qty * item.price)
+          .reduce((a, b) => a + b, 0)
+          .toFixed(2) > 0 ? (
+          oderDetails.map(({ title, description, productId, price, qty }) => {
+            return (
+              <View key={productId}>
+                {qty > 0 ? (
+                  <View style={oderStyles.wrapProduct}>
+                    <Text style={oderStyles.title}>{title}</Text>
 
-              <Text style={oderStyles.qty}> {qty} </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        marginRight: -12,
+                      }}
+                    >
+                      <Text
+                        style={oderStyles.setting}
+                        onPress={() =>
+                          minusItem({
+                            title,
+                            description,
+                            productId,
+                            price,
+                            qty,
+                          })
+                        }
+                      >
+                        -
+                      </Text>
+                      <Text
+                        style={oderStyles.setting}
+                        onPress={() =>
+                          plusItem({
+                            title,
+                            description,
+                            productId,
+                            price,
+                            qty,
+                          })
+                        }
+                      >
+                        +
+                      </Text>
+                    </View>
 
-              {/* </View> */}
-            </View>
-          );
-        })}
+                    <Text style={oderStyles.qty}> {qty}x </Text>
+                  </View>
+                ) : null}
+              </View>
+            );
+          })
+        ) : (
+          <View>
+            <Text> Your Cart is empty </Text>
+          </View>
+        )}
         <View style={oderStyles.sumRow}>
           <Text>SubTotal</Text>
           <Text>

@@ -17,6 +17,8 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     paddingBottom: 8,
+    paddingLeft: 3,
+    // backgroundColor: 'blue',
   },
   description: {},
   price: {
@@ -28,13 +30,15 @@ export default StyleSheet.create({
     // fontWeight: 'bold',
   },
   qty: {
-    width: '6%',
+    width: '10%',
     position: 'absolute',
     top: 16,
-    left: 6,
+    left: 3,
     color: '#fd4900',
     fontSize: 14,
     fontWeight: 'bold',
+
+    // backgroundColor: 'red',
   },
   wrapButton: {
     width: 30,

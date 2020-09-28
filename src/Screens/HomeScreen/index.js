@@ -134,6 +134,7 @@ const HomeScreen = ({ navigation }) => {
               <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => {
+                  console.log(oderDetails);
                   setOpenModal(!openModal);
                   navigation.push('CheckoutScreen');
                 }}
