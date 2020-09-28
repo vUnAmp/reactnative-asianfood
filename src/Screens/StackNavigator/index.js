@@ -100,20 +100,51 @@ const MainStackNavigator = ({ navigation }) => {
         }}
         component={HomeScreen}
       />
-
+      <Stack.Screen
+        options={{
+          title: 'Sign In',
+          headerTitleStyle: {
+            fontSize: 15,
+            color: '#009de0',
+          },
+          headerTintColor: '#fd4900',
+          headerBackTitleStyle: {
+            fontSize: 15,
+          },
+        }}
+        name='LoginScreen'
+        component={LoginScreen}
+      />
+      <Stack.Screen
+        options={{
+          title: 'Create Account',
+          headerTitleStyle: {
+            fontSize: 15,
+            color: '#009de0',
+          },
+          headerTintColor: '#fd4900',
+          headerBackTitleStyle: {
+            fontSize: 15,
+          },
+        }}
+        name='RegistrationScreen'
+        component={RegistrationScreen}
+      />
       <Stack.Screen
         name='CheckoutScreen'
         options={{
           title: 'Checkout',
           headerTitleStyle: {
-            fontSize: 14,
+            fontSize: 15,
             color: '#009de0',
           },
           headerTintColor: '#fd4900',
+          headerBackTitleStyle: {
+            fontSize: 15,
+          },
         }}
         component={CheckoutScreen}
       />
-      <Stack.Screen name='RegistrationScreen' component={RegistrationScreen} />
     </Stack.Navigator>
   );
 };
