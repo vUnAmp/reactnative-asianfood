@@ -4,8 +4,8 @@ import Svg, { Rect } from 'react-native-svg';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import LoginScreen from '../LoginScreen';
-import RegistrationScreen from '../RegistrationScreen';
+import LoginScreen from '../LoginScreen/signin';
+import RegistrationScreen from '../RegistrationScreen/signup';
 import AddProductScreen from '../AddProductScreen';
 import HomeScreen from '../HomeScreen';
 import styles from './styles';

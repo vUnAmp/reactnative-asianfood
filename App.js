@@ -13,8 +13,7 @@ import firebase from './src/firebase/config';
 // const Favicon = require("./assets/favicon.png");
 import Favicon from './assets/favicon.png';
 import Screens from './src/Screens/';
-import LoginScreen from './src/Screens/LoginScreen';
-import RegistrationScreen from './src/Screens/RegistrationScreen';
+
 import ImageScreen from './src/Screens/ImageScreen';
 import AddProductScreen from './src/Screens/AddProductScreen';
 
