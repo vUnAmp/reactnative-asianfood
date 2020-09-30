@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   userCheckInfo,
   userSignInWithEmailandPassword,
+  userLogOut,
 } from '../../redux/User/user.action';
 
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
@@ -42,29 +43,29 @@ const DrawerContent = (props) => {
   const { data } = props;
   // console.log(props);
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((userAuth) => {
-      if (userAuth) {
-        dispatch(userSignInWithEmailandPassword());
-        console.log(userAuth.uid);
-        firebase
-          .firestore()
-          .collection('users')
-          .doc(userAuth.uid)
-          .get()
-          .then((data) => {
-            return data.data();
-          })
-          .then((data) => {
-            dispatch(userCheckInfo(data));
-          })
-          .catch((err) => console.log(err));
-      } else {
-        console.log('user is not Online hecked');
-      }
-    });
-    // return () => {
-    //   cleanup;
-    // };
+    const checkAuth = () =>
+      firebase.auth().onAuthStateChanged((userAuth) => {
+        if (userAuth) {
+          dispatch(userSignInWithEmailandPassword());
+          console.log(userAuth.uid);
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(userAuth.uid)
+            .get()
+            .then((data) => {
+              return data.data();
+            })
+            .then((data) => {
+              dispatch(userCheckInfo(data));
+            })
+            .catch((err) => console.log(err));
+        } else {
+          console.log('user is not Online hecked');
+        }
+      });
+
+    checkAuth();
   }, []);
   // console.log(userInfo);
   return (
@@ -72,9 +73,9 @@ const DrawerContent = (props) => {
       <View style={drawerStyles.container}>
         <View style={drawerStyles.brand}>
           <Text style={drawerStyles.title}>AsianBistro</Text>
-          <Text style={drawerStyles.description}>
+          {/* <Text style={drawerStyles.description}>
             Leker, Gesund und Schnell
-          </Text>
+          </Text> */}
         </View>
         <View style={drawerStyles.close}>
           <AntDesign
@@ -88,18 +89,19 @@ const DrawerContent = (props) => {
         </View>
 
         {currentUser ? (
-          <View>
-            <Text>Hello</Text>
-            <Text> {userInfo.fullName} </Text>
+          <View style={drawerStyles.userHasLogin}>
+            <Text style={drawerStyles.fullName}>{userInfo.fullName} </Text>
+            <Text style={drawerStyles.accountDetails}>View your Account</Text>
           </View>
         ) : (
           <View style={drawerStyles.userSection}>
             <Button
               mode='outlined'
-              color='#009de0'
+              color='#f05123'
               labelStyle={{
                 fontSize: 11,
                 textAlignVertical: 'center',
+                fontWeight: '600',
               }}
               onPress={() => {
                 props.navigation.closeDrawer();
@@ -110,15 +112,13 @@ const DrawerContent = (props) => {
             </Button>
             <Button
               mode='contained'
-              color='#009de0'
-              contentStyle={
-                {
-                  // marginLeft: 130,
-                }
-              }
+              color='#f05123'
+              contentStyle={{}}
               labelStyle={{
                 fontSize: 11,
                 textAlignVertical: 'center',
+                color: 'white',
+                fontWeight: '600',
               }}
               onPress={() => {
                 props.navigation.closeDrawer();
@@ -197,6 +197,30 @@ const DrawerContent = (props) => {
             label='Contact'
             onPress={() => {}}
           />
+          {currentUser ? (
+            <DrawerItem
+              style={{
+                paddingLeft: 12,
+                // marginTop: 30,
+                justifyContent: 'space-between',
+                backgroundColor: '#fff',
+                marginBottom: 1,
+              }}
+              icon={({ color, size }) => (
+                <MaterialCommunityIcons name='home' color='#404040' size={20} />
+              )}
+              label='Logout'
+              onPress={() => {
+                firebase
+                  .auth()
+                  .signOut()
+                  .then(() => {
+                    props.navigation.closeDrawer();
+                    dispatch(userLogOut());
+                  });
+              }}
+            />
+          ) : null}
         </Drawer.Section>
         <View style={drawerStyles.logo}>
           <Avatar.Image

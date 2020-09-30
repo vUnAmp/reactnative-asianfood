@@ -14,4 +14,7 @@ export const userCheckInfo = (data) => ({
   payload: data,
 });
 
-export const userLogOut = () => {};
+export const userLogOut = () => ({
+  type: userTypes.USER_LOGOUT,
+  payload: false,
+});

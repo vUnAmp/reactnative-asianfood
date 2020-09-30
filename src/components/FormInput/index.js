@@ -16,7 +16,7 @@ const FormInput = ({
   <View style={styles.inputContainer}>
     <Input
       {...rest}
-      leftIcon={<Ionicons name={iconName} size={28} color={iconColor} />}
+      leftIcon={<Ionicons name={iconName} size={20} color={iconColor} />}
       leftIconContainerStyle={styles.iconStyle}
       placeholderTextColor='grey'
       name={name}
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     marginRight: 10,
+  },
+  input: {
+    fontSize: 16,
   },
 });
 

@@ -50,7 +50,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FormInput
         name='email'
         value={email}
@@ -93,7 +93,7 @@ export default function LoginScreen({ navigation }) {
           type='clear'
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 30,
+    paddingTop: 100,
   },
   buttonContainer: {
     margin: 25,

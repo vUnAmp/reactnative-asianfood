@@ -131,7 +131,7 @@ const RegistrationScreen = ({ navigation, ...props }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 100,
     backgroundColor: '#fff',
   },
   buttonContainer: {
