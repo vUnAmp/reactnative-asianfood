@@ -23,7 +23,6 @@ import firebase from '../../firebase/config';
 
 import mainStyles from '../../Styles/mainStyles';
 import OderModal from '../OderMoal';
-import { set } from 'react-native-reanimated';
 
 const mapState = ({ store }) => ({
   oderDetails: store.oderDetails,
@@ -38,7 +37,6 @@ const HomeScreen = ({ navigation }) => {
   const onSignUpPress = () => {
     navigation.navigate('RegistrationScreen');
   };
-
   const [openModal, setOpenModal] = useState(false);
   const [products, setProducts] = useState([]);
   const [qty, setQty] = useState(1);
@@ -86,7 +84,6 @@ const HomeScreen = ({ navigation }) => {
         .catch((error) => {
           console.log(error);
         });
-
     fetchData();
   }, []);
   const renderItem = ({ item }) => (

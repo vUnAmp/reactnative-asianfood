@@ -5,10 +5,15 @@ import FormInput from '../../components/FormInput';
 import FormButton from '../../components/FormButton';
 import firebase from '../../firebase/config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// REDUX stuff
+import { userSignInWithEmailandPassword } from '../../redux/User/user.action';
+import { useSelector, useDispatch } from 'react-redux';
+
 //Disable warning setting a timer
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Setting a timer']);
 export default function LoginScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,6 +26,7 @@ export default function LoginScreen({ navigation }) {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
+        dispatch(userSignInWithEmailandPassword());
         const uid = res.user.uid;
         const usersRef = firebase.firestore().collection('users');
         usersRef
@@ -71,16 +77,22 @@ export default function LoginScreen({ navigation }) {
           buttonColor='#039BE5'
         />
       </View>
-      <Button
-        title="Don't have an account? Sign Up"
-        onPress={() => {
-          navigation.navigate('RegistrationScreen');
+      <View
+        style={{
+          marginHorizontal: 25,
         }}
-        titleStyle={{
-          color: '#F57C00',
-        }}
-        type='clear'
-      />
+      >
+        <Button
+          title="Don't have an account? Sign Up"
+          onPress={() => {
+            navigation.navigate('RegistrationScreen');
+          }}
+          titleStyle={{
+            color: '#F57C00',
+          }}
+          type='clear'
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -89,6 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: 30,
   },
   buttonContainer: {
     margin: 25,

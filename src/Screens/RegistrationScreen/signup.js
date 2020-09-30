@@ -4,6 +4,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button } from 'react-native-elements';
 import FormInput from '../../components/FormInput';
 import FormButton from '../../components/FormButton';
+// REDUX Stuff
+import { userSignupWithEmailandPassword } from '../../redux/User/user.action';
+import { useSelector, useDispatch } from 'react-redux';
 
 import firebase from '../../firebase/config';
 //Disable warning setting a timer
@@ -11,6 +14,8 @@ import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Setting a timer']);
 
 const RegistrationScreen = ({ navigation, ...props }) => {
+  const dispatch = useDispatch();
+
   const [fullName, setFullname] = useState('');
   const [fullnameError, setFullnameError] = useState('');
   const [email, setEmail] = useState('');
@@ -24,12 +29,7 @@ const RegistrationScreen = ({ navigation, ...props }) => {
     navigation.navigate('LoginScreen');
   };
   const onRegisterPress = () => {
-    if (
-      password.length > 5 &&
-      fullName.length > 5 &&
-      password.length > 5 &&
-      confirmPassword.length > 5
-    ) {
+    if (password.length > 5 && fullName.length > 5 && password.length > 5) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
@@ -40,6 +40,7 @@ const RegistrationScreen = ({ navigation, ...props }) => {
             email,
             fullName,
           };
+          dispatch(userSignupWithEmailandPassword());
           const usersRef = firebase.firestore().collection('users');
           usersRef
             .doc(uid)
@@ -72,7 +73,7 @@ const RegistrationScreen = ({ navigation, ...props }) => {
         {/* <SafeAreaView style={styles.container}> */}
         <FormInput
           name='fullname'
-          value={email}
+          value={fullName}
           placeholder='Enter full name'
           autoCapitalize='none'
           onChangeText={(text) => setFullname(text)}
@@ -101,20 +102,26 @@ const RegistrationScreen = ({ navigation, ...props }) => {
           <FormButton
             buttonType='outline'
             onPress={onRegisterPress}
-            title='LOGIN'
+            title='SUBMIT'
             buttonColor='#039BE5'
           />
         </View>
-        <Button
-          title='Already have an account? Sign In'
-          onPress={() => {
-            navigation.navigate('LoginScreen');
+        <View
+          style={{
+            marginHorizontal: 25,
           }}
-          titleStyle={{
-            color: '#F57C00',
-          }}
-          type='clear'
-        />
+        >
+          <Button
+            title='Already have an account? Sign In'
+            onPress={() => {
+              navigation.navigate('LoginScreen');
+            }}
+            titleStyle={{
+              color: '#F57C00',
+            }}
+            type='clear'
+          />
+        </View>
         {/* </SafeAreaView> */}
       </KeyboardAwareScrollView>
     </View>
@@ -124,6 +131,7 @@ const RegistrationScreen = ({ navigation, ...props }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 30,
     backgroundColor: '#fff',
   },
   buttonContainer: {

@@ -21,6 +21,11 @@ const DrawerNavigator = () => {
         width: '88%',
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
+      // drawerContent={(props) => (
+      //   <View>
+      //     <Text>Hello</Text>
+      //   </View>
+      // )}
       initialRouteName='Home'
     >
       <Drawer.Screen name='Home' component={MainStackNavigator} />
